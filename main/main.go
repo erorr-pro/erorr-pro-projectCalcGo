@@ -20,7 +20,7 @@ func main() {
 	fmt.Scanln(&operator)
 
 	// Вызов функции calculations для выполнения операции
-	var result = calculations(number1, number2, operator)
+	result := calculations(number1, number2, operator)
 
 	// Вывод результата
 	fmt.Println("Результат:", result)
