@@ -35,13 +35,10 @@ func calculations(number1, number2 float64, operator string) float64 {
 	switch operator {
 	case "+":
 		result = number1 + number2
-		break
 	case "-":
 		result = number1 - number2
-		break
 	case "*":
 		result = number1 * number2
-		break
 	case "/":
 		// Проверяем, что делитель не равен нулю
 		if number2 != 0 {
@@ -50,11 +47,9 @@ func calculations(number1, number2 float64, operator string) float64 {
 			// Выводим сообщение об ошибке при делении на ноль
 			fmt.Println("Ошибка: деление на ноль")
 		}
-		break
 	default:
 		// Выводим сообщение об ошибке при некорректном операторе
 		fmt.Println("Ошибка: некорректный оператор")
-		break
 	}
 
 	return result
