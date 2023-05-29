@@ -20,7 +20,6 @@ func main() {
 		fmt.Println("Ошибка чтения ввода: ", err)
 		return
 	}
-	//expression = strings.TrimSpace(expression)
 
 	// Вычисление
 	result, err := evaluateExpression(expression)
