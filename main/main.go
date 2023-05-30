@@ -43,7 +43,8 @@ func evaluateExpression(expression string) (float64, error) {
 		priority := priorityOperation(token) // Определяем приоритет операции
 
 		switch {
-		case priority == 1: // Если операция имеет приоритет 1, добавляем ее в стек операторов
+
+		case priority == 1: // Если операция имеет приоритет 1 (скобка открытия), добавляем ее в стек операторов
 			operatorStack = append(operatorStack, token)
 
 		case priority == 2: // Если операция имеет приоритет 2 (скобка закрытия), выполняем операции внутри скобок
@@ -96,6 +97,7 @@ func evaluateExpression(expression string) (float64, error) {
 			}
 
 			numberStack = append(numberStack, number)
+
 		}
 	}
 
@@ -124,7 +126,7 @@ func parseExpression(expression string) []string {
 	}
 
 	var tokens []string
-	expression = strings.ReplaceAll(expression, " ", "")
+	expression = strings.ReplaceAll(expression, " ", "") // Удаление пробелов из выражения
 	expression = strings.ReplaceAll(expression, "(-", "(0-")
 	expression = strings.ReplaceAll(expression, ")+", ")+0+")
 	expression = strings.ReplaceAll(expression, "(-(", "(0-(")
@@ -133,12 +135,12 @@ func parseExpression(expression string) []string {
 	expression = strings.ReplaceAll(expression, "+-", "+(0-1)*")
 
 	if strings.HasPrefix(expression, "-") {
-		expression = "0" + expression
+		expression = "0" + expression // Добавление нуля в начало, если выражение начинается с минуса
 	}
 
-	pattern := `[*/\-+()]|(\d+(\.\d+)?)`
-	re := regexp.MustCompile(pattern)
-	matches := re.FindAllString(expression, -1)
+	pattern := `[*/\-+()]|(\d+(\.\d+)?)` // Шаблон для поиска операторов и чисел в выражении
+	reg := regexp.MustCompile(pattern)
+	matches := reg.FindAllString(expression, -1)
 
 	for _, match := range matches {
 		tokens = append(tokens, match)
